@@ -184,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modalProsecutor').value = caseItem.prosecutor;
             document.getElementById('modalStatus').value = caseItem.status;
             document.getElementById('modalDate').value = caseItem.date;
+            document.getElementById('modalCourtDate').value = caseItem.courtDate || '';
+            document.getElementById('modalCourtTime').value = caseItem.courtTime || '';
             document.getElementById('modalNotes').value = caseItem.notes || '';
             caseModal.classList.add('active');
         }
@@ -196,6 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 prosecutor: document.getElementById('modalProsecutor').value,
                 status: document.getElementById('modalStatus').value,
                 date: document.getElementById('modalDate').value,
+                courtDate: document.getElementById('modalCourtDate').value,
+                courtTime: document.getElementById('modalCourtTime').value,
                 notes: document.getElementById('modalNotes').value,
             };
 
@@ -221,11 +225,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (publicSearchForm) {
         publicSearchForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const searchInput = document.getElementById('publicSearchInput').value;
+            const searchInput = document.getElementById('publicSearchInput').value.trim();
             if (searchInput) {
                 document.getElementById('publicEmptyState').style.display = 'none';
+                const timelineContainer = document.getElementById('publicTimelineContainer');
+                timelineContainer.style.display = 'block';
+                
                 document.getElementById('searchResultId').textContent = searchInput;
-                document.getElementById('publicTimelineContainer').style.display = 'block';
+                
+                const allCases = getCases();
+                const foundCase = allCases.find(c => c.id.toLowerCase() === searchInput.toLowerCase());
+                
+                const timelineDiv = timelineContainer.querySelector('.timeline');
+                timelineDiv.innerHTML = ''; // Clear existing
+                
+                if (foundCase) {
+                    // Show case found
+                    timelineDiv.innerHTML = `
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <span class="timeline-date">最後更新：${foundCase.date}</span>
+                                <h4 class="timeline-title">${foundCase.title}</h4>
+                                <p class="timeline-desc">目前狀態：<strong style="color: var(--primary-color);">${foundCase.status}</strong></p>
+                                ${foundCase.courtDate ? `<p class="timeline-desc" style="margin-top: 0.5rem; color: var(--danger);">📅 庭期：${foundCase.courtDate} ${foundCase.courtTime || ''}</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Not found
+                    timelineDiv.innerHTML = `
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <span class="timeline-date">查無資料</span>
+                                <h4 class="timeline-title" style="color: var(--danger);">查無此案件紀錄</h4>
+                                <p class="timeline-desc">系統尚未匯入該案件之相關歷程，請確認您輸入的案號是否正確。</p>
+                            </div>
+                        </div>
+                    `;
+                }
             }
         });
     }
@@ -294,6 +331,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const todayStyle = isToday ? 'background-color: var(--primary-color); color: white; padding: 2px 6px; border-radius: 4px;' : '';
                 
                 daySlot.innerHTML = `<span class="calendar-date" style="${todayStyle}">${i}</span>`;
+                
+                // Add events for this day
+                const currentDayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const allCases = getCases();
+                allCases.forEach(c => {
+                    if (c.courtDate === currentDayStr) {
+                        const eventDiv = document.createElement('div');
+                        eventDiv.className = 'event danger';
+                        eventDiv.style.marginTop = '0.5rem';
+                        eventDiv.textContent = `${c.courtTime || ''} ${c.id}`;
+                        daySlot.appendChild(eventDiv);
+                    }
+                });
+
                 calendarGrid.appendChild(daySlot);
             }
         }
