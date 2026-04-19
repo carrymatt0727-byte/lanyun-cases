@@ -416,6 +416,13 @@ ul {
   transform: translateY(0);
 }
 
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .modal-header {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
