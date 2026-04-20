@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>儀表板 - 嵐雲地檢署</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">嵐雲地檢署</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">主控台概覽</a>
+                <a href="cases.html" class="nav-item">案件列表管理</a>
+                <a href="upload.html" class="nav-item">判決書上傳</a>
+                <a href="index.html" class="nav-item">回公開查詢頁</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="topbar">
+                <span>管理員：<span id="userNameDisplay">Admin</span></span>
+                <a href="#" id="logoutBtn" style="color:red; margin-left:10px;">登出</a>
+            </header>
+            <div class="content-wrapper">
+                <h2>系統數據概覽</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">總案件數</div>
+                        <div class="stat-value" id="statTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">偵查中</div>
+                        <div class="stat-value" id="statInvestigating">0</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

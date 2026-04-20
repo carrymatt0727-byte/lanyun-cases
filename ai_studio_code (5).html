@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>上傳判決書</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">嵐雲地檢署</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">主控台概覽</a>
+                <a href="cases.html" class="nav-item">案件列表管理</a>
+                <a href="upload.html" class="nav-item active">判決書上傳</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <div class="content-wrapper">
+                <h2>判決書上傳作業</h2>
+                <div class="card p-2">
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label>對應案號</label>
+                            <input type="text" id="caseId" class="form-control" placeholder="請輸入欲關聯的案號 (例: 112偵123)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>文件類型</label>
+                            <select id="judgmentType" class="form-control">
+                                <option value="起訴書">起訴書</option>
+                                <option value="判決書">判決書</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>選擇 PDF 檔案</label>
+                            <input type="file" id="documentFile" class="form-control" accept=".pdf" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">開始上傳並公開</button>
+                        <p id="uploadSuccess" style="display:none; color:green; margin-top:10px;">✓ 上傳成功！市民現在可以搜尋到了。</p>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>案件管理</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">嵐雲地檢署</div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">主控台概覽</a>
+                <a href="cases.html" class="nav-item active">案件列表管理</a>
+                <a href="upload.html" class="nav-item">判決書上傳</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <div class="content-wrapper">
+                <div class="flex-between mb-2">
+                    <h2>案件列表管理</h2>
+                    <button class="btn btn-primary" id="addCaseBtn">+ 新增案件</button>
+                </div>
+                <div class="card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>案號</th>
+                                <th>案由</th>
+                                <th>狀態</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="casesManagementTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 簡易 Modal (新增案件) -->
+    <div id="caseModal" class="modal-overlay">
+        <div class="modal-content">
+            <form id="caseForm">
+                <h3>新增/編輯案件</h3>
+                <div class="form-group"><label>案號</label><input type="text" id="modalCaseId" class="form-control" placeholder="例: 112偵123" required></div>
+                <div class="form-group"><label>案由</label><input type="text" id="modalTitleInput" class="form-control" required></div>
+                <div class="form-group">
+                    <label>狀態</label>
+                    <select id="modalStatus" class="form-control">
+                        <option value="偵查中">偵查中</option>
+                        <option value="已結案">已結案</option>
+                    </select>
+                </div>
+                <div class="flex-end">
+                    <button type="button" class="btn btn-outline modal-close">取消</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

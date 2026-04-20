@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案件查詢 - 嵐雲地方檢察署</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="public-body">
+    <nav class="public-navbar">
+        <div class="container flex-between">
+            <div class="public-brand">嵐雲地方檢察署案件查詢平台</div>
+            <a href="admin_login.html" class="btn-login-link">管理員登入</a>
+        </div>
+    </nav>
+
+    <div class="judicial-header-bar">
+        <div class="container">
+            <span>ⓘ 案件進度查詢 (含部分簡易案件)</span>
+            <span class="helper-text">- 如您為無障礙網頁使用者，請點擊 <a href="#">這裡</a> 進行查詢</span>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="search-main-card">
+            <div class="search-sidebar">檢索字詞</div>
+            <div class="search-content">
+                <form id="publicSearchForm" class="judicial-search-group">
+                    <input type="text" id="publicSearchInput" class="judicial-input" placeholder="可輸入案號 (例: 112偵123)、案由、或身分證字號..." required>
+                    <button type="submit" class="btn-judicial-submit">送出查詢</button>
+                    <button type="button" class="btn-judicial-info">檢索字詞說明 ⓘ</button>
+                </form>
+
+                <p class="warning-text">※如欲使用可對各項欄位設定條件之複合欄位查詢功能，請按 <button type="button" class="btn-orange">更多條件查詢</button></p>
+
+                <div class="search-examples">
+                    <p>簡易輸入格式範例：<span class="badge-blue">更多說明</span></p>
+                    <ol>
+                        <li>輸入【112偵123】：可查詢本署 112年度偵字第123號案件。</li>
+                        <li>輸入【112他888】：可查詢本署 112年度他字第888號案件。</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查詢結果 -->
+        <div id="publicTimelineContainer" class="result-section" style="display: none;">
+            <h3 class="result-title">查詢結果：<span id="searchResultId"></span></h3>
+            <div class="timeline">
+                <!-- 由 app.js 動態注入內容 -->
+            </div>
+            <p class="text-light mt-2" style="font-size: 0.8rem;">(註：公開查詢僅顯示案件狀態與裁判文書，不顯示詳細個資)</p>
+        </div>
+        
+        <div id="publicEmptyState" class="text-center mt-3" style="color: #888;">
+            請在上方輸入框進行查詢
+     
